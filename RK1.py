@@ -73,6 +73,7 @@ def main():
                     for dir_name, dir_id, file_id in many_to_many_temp
                     for f in files if f.id == file_id]
 
+
     print('Задание Г1:\n«Каталог» и «Файл» связаны соотношением один-ко-многим. Выведите список всех каталогов,'
     'у которых название начинается с буквы «Л», и список хранящихся в них файлов.')
     names = []
@@ -82,11 +83,13 @@ def main():
     res1 = {name: [(otm[0], otm[1]) for otm in one_to_many if otm[2] == name] for name in names}
     print(res1)
 
+
     print('\nЗадание Г2:\n«Каталог» и «Файл» связаны соотношением один-ко-многим.'
     'Выведите список каталогов с максимальным размером файла в каждом каталоге, отсортированный по максимальному размеру файла.')
     dirs = [d.name for d in directs]
     res2 = sorted([(name, max([otm[1] for otm in one_to_many if otm[2] == name])) for name in dirs], key=itemgetter(1), reverse=True)
     print(res2)
+
 
     print('\nЗадание Г3:\n«Каталог» и «Файл» связаны соотношением многие-ко-многим.'
           'Выведите список всех связанных файлов и каталогов, отсортированный по каталогам, сортировка по файлам произвольная. ')
