@@ -1,0 +1,105 @@
+#:kivy 1.11.1
+
+<Gun>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        PushMatrix:
+        Rotate:
+            angle: -90 + self.rot
+            origin: self.pos
+        Color:
+            rgba: 1, 0, 0, 1
+        Rectangle:
+            pos: root.pos
+            size: 50, 20
+    canvas.after:
+        PopMatrix
+
+
+<Ball>:
+    size: 100, 100
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, 1, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+
+<Fire>:
+    size: 20, 20
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+
+<GunGame>:
+    ball: main_ball
+    gun1: left_gun
+    gun2: right_gun
+    fire1: left_fire
+    fire2: right_fire
+
+    canvas.before:
+        Color:
+            rgba: 0.04, 0.85, 0.316, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.center_x - 5, 0
+            size: 10, self.height
+        Rectangle:
+            pos: self.center_x - self.width/3, 0
+            size: 10, self.height
+        Rectangle:
+            pos: self.center_x + self.width/3, 0
+            size: 10, self.height
+
+
+
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: str(root.fire1.score)
+
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: str(root.fire2.score)
+
+
+
+    Ball:
+        id: main_ball
+        center: root.center
+
+    Gun:
+        id: left_gun
+        x: root.x + self.width/2
+        y: root.center_y
+
+    Gun:
+        id: right_gun
+        x: root.width - self.width/2
+        y: root.center_y
+
+    Fire:
+        id: left_fire
+        x: root.x + self.width/2
+        y: root.center_y
+
+    Fire:
+        id: right_fire
+        x: root.width
+        y: root.center_y - 10
